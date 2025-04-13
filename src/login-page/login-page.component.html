@@ -1,0 +1,25 @@
+<div class="mainDiv">
+  <div [ngClass]="loginOutro ? 'fadeOut' : 'backgroundDiv'"></div>
+  <h1 class="headerText">{{ showText }}</h1>
+  <img [ngClass]="loginOutro ? 'exitImage' : 'imageDiv'" alt="phoneIcon" src="PhoneIcon.png" />
+  <div [ngClass]="loginOutro ? 'exitInput' : 'inputSection'">
+    <div class="subInput">
+      <ng-container *ngIf="!phoneLogin">
+        <select title="flag_dropdown" [(ngModel)]="selected_value"
+          [ngStyle]="{ 'background': 'linear-gradient(150deg, ' + selected_value.colors.join(', ') + ')' }">
+          <option *ngFor="let flag of flag_icon" [ngValue]="flag">
+            {{ flag.flag }} {{ flag.phoneCode }}
+          </option>
+        </select>
+        <input type="text" placeholder="Enter your phone" (input)="inputValidation('phone')" [(ngModel)]="input_data" />
+      </ng-container>
+      <input *ngIf="phoneLogin" type="text" placeholder="Enter your OTP" (input)="inputValidation('otp')"
+        [(ngModel)]="input_data" />
+    </div>
+    <button (click)="handleSubmit()" [ngStyle]="validation_error ? { 'color': 'red', 'background': 'transparent' } : {}"
+      [disabled]="validation_error || !input_data">
+      <i *ngIf="loader" class="pi pi-spin pi-spinner"></i>
+      {{ validation_error || 'Submit' }}
+    </button>
+  </div>
+</div>

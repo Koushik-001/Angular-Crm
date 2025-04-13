@@ -1,0 +1,189 @@
+.mainDiv {
+  width: 99%;
+  padding: 5px;
+  text-align: center;
+  display: flex;
+}
+
+.backgroundDiv,
+.fadeOut {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+}
+
+.backgroundDiv {
+  animation: backgroundAnimation 2s 3s forwards;
+}
+
+@keyframes backgroundAnimation {
+  0% {
+    background: linear-gradient(to right, black, #cf0606);
+    clip-path: polygon(0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 100%, 0% 100%, 0% 0%);
+  }
+  100% {
+    background: linear-gradient(to right, black, #cf0606);
+    clip-path: polygon(0% 0%, 0% 0%, 0% 0%, 55% 0%, 40% 100%, 0% 100%, 0% 0%);
+  }
+}
+
+.fadeOut {
+  animation: backgroundSlideOut 1s forwards;
+}
+
+@keyframes backgroundSlideOut {
+  0% {
+    background: linear-gradient(to right, black, #cf0606);
+    clip-path: polygon(0% 0%, 0% 0%, 0% 0%, 55% 0%, 40% 100%, 0% 100%, 0% 0%);
+  }
+  100% {
+    background: linear-gradient(to right, black, #cf0606);
+    clip-path: polygon(0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 100%, 0% 100%, 0% 0%);
+  }
+}
+
+.headerText {
+  position: absolute;
+  left: 30vw;
+  top: 40vh;
+  font-size: 50px;
+  font-weight: 400;
+  background: linear-gradient(120deg, #807a7a 40%, #cf0606);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.headerText::after {
+  content: "|";
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.imageDiv {
+  animation: phoneAnimation 3s forwards;
+}
+
+.exitImage {
+  animation: imageExitAnimation 1s forwards;
+}
+
+@keyframes phoneAnimation {
+  0%, 50% {
+    transform: rotateY(0deg) scale(0);
+  }
+  50% {
+    transform: rotateY(180deg) scale(0);
+  }
+  100% {
+    transform: rotateY(360deg) scale(1) translateX(72vw);
+  }
+}
+
+@keyframes imageExitAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+.inputSection,
+.exitInput {
+  width: 15.5%;
+  position: absolute;
+  top: 40%;
+  left: 76%;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputSection {
+  transform: scale(0);
+  animation: inputAnimation 2s 3s forwards;
+}
+
+@keyframes inputAnimation {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1) translateY(40%);
+  }
+}
+
+.exitInput {
+  animation: inputExitAnimation 1s forwards;
+}
+
+@keyframes inputExitAnimation {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+input {
+  width: 10vw;
+  border-radius: 5px;
+}
+
+button {
+  width: max-content;
+  margin-top: 5px;
+  background: linear-gradient(to right, #787d79, #d2d6d3);
+  border: 0;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+button:hover {
+  box-shadow: 0 0 10px gray;
+}
+
+button:active {
+  transform: translateY(2px) scale(0.98);
+}
+
+button:disabled:hover,
+button:disabled:active {
+  box-shadow: none;
+  transform: none;
+}
+
+.subInput {
+  display: flex;
+  justify-content: space-between;
+}
+
+select {
+  padding: 3px;
+  border: 0;
+  border-radius: 5px;
+}
+
+i {
+  font-size: small;
+  margin-right: 3px;
+  color: black;
+}

@@ -1,0 +1,56 @@
+.mainDiv {
+  // animation: feedBackIntro 2s forwards;
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+  font-size: 30px;
+  padding: 5px;
+}
+
+.userData {
+  display: flex;
+  justify-content: space-between;
+}
+
+@keyframes feedBackIntro {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.metricDiv {
+  width: 22%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px gray;
+  padding: 10px;
+  position: relative;
+  left: 0;
+  top: 0;
+}
+
+.tableDiv {
+  width: 75%;
+  height: 350px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px gray;
+  padding: 10px;
+}
+
+// .tableDiv th {
+//   font-weight: bolder;
+//   text-align: left;
+//   font-size: 20px;
+// }
+p-table thead tr{
+    background: linear-gradient(130deg, #5794f7, white);
+    border-radius: 10px;
+}
+p-table thead th{
+  font-size: 20px;
+  font-weight: 900;
+}
