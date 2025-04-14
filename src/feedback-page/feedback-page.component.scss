@@ -41,16 +41,19 @@ h1 {
   padding: 10px;
 }
 
-// .tableDiv th {
-//   font-weight: bolder;
-//   text-align: left;
-//   font-size: 20px;
-// }
 p-table thead tr{
-    background: linear-gradient(130deg, #5794f7, white);
-    border-radius: 10px;
+    background: linear-gradient(130deg, #5794f7, red);
 }
-p-table thead th{
+ 
+.p-datatable thead > tr > th {
   font-size: 20px;
-  font-weight: 900;
+  font-weight:900;
+}
+
+
+th:first-child {
+  border-radius: 10px 0 0 0;
+}
+th:last-child{
+  border-radius: 0 10px 0 0; 
 }
