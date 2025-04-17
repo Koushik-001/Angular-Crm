@@ -1,10 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject, PLATFORM_ID, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Inject,
+  PLATFORM_ID,
+  ChangeDetectorRef,
+  ViewEncapsulation,
+} from '@angular/core';
 import { ChartModule } from 'primeng/chart';
 import { AuthService } from '../api-calls.service';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import {TableModule} from 'primeng/table';
+import { TableModule } from 'primeng/table';
+import { FormsModule } from '@angular/forms';
 interface MetricData {
   product_type: string;
   total_cost: number;
@@ -12,7 +19,7 @@ interface MetricData {
 
 @Component({
   selector: 'app-feedback-page',
-  imports: [ChartModule, CommonModule,TableModule],
+  imports: [ChartModule, CommonModule, TableModule,FormsModule],
   templateUrl: './feedback-page.component.html',
   styleUrls: ['./feedback-page.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -23,19 +30,33 @@ export class FeedbackPageComponent {
   metricData: number[] = [];
   data: any;
   options: any;
-  tableData: any =[];
+  tableData: any = [];
+  feedback_form = {
+    product_type: '',
+    mode_of_purchase: '',
+    cost_of_product: '',
+    phone:localStorage.getItem('phone')
+  };
+  count=0
+  form_id=[{"Enter the type" :"product_type" },{"Enter the platform" :"mode_of_purchase"},{"Enter the product" :"product" } ]
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private apicall: AuthService,
     private cd: ChangeDetectorRef
   ) {}
 
+  onSubmit(): void {
+    this.count+=1;
+    console.log('Submitted Feedback:', this.feedback_form);
+  }
+
   getMetricData = () => {
     this.phone_number = localStorage.getItem('phone') || '';
     if (!this.phone_number) {
       return;
     }
-    this.apicall.getMetrics(this.phone_number)
+    this.apicall
+      .getMetrics(this.phone_number)
       .pipe(
         catchError((error) => {
           console.error('Error fetching metric data:', error);
@@ -71,34 +92,41 @@ export class FeedbackPageComponent {
         this.cd.markForCheck();
         this.options = {
           font: {
-            family: '"Iceland", sans-serif'
+            family: '"Iceland", sans-serif',
           },
           plugins: {
             legend: {
               labels: {
                 color: '#044a1d',
                 font: {
-                  family: '"Iceland", sans-serif'
-                }
-              }
-            }
+                  family: '"Iceland", sans-serif',
+                },
+              },
+            },
           },
           scales: {
             r: {
               grid: {
-                color: '#068a36'
-              }
-            }
-          }
+                color: '#068a36',
+              },
+            },
+          },
         };
       });
   };
-  
-  getUserData=async()=>{
+
+  getUserData = async () => {
     this.phone_number = localStorage.getItem('phone') || '';
-   try{await this.apicall.getUserFeedback(this.phone_number).subscribe((data)=>{this.tableData = data})}
-   catch(error){console.log(error)}
-  }
+    try {
+      await this.apicall
+        .getUserFeedback(this.phone_number)
+        .subscribe((data) => {
+          this.tableData = data;
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   ngOnInit() {
     this.getUserData();
