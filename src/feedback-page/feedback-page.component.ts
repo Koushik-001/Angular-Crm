@@ -12,6 +12,7 @@ import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { TableModule } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
+import { Rating } from 'primeng/rating'
 interface MetricData {
   product_type: string;
   total_cost: number;
@@ -19,7 +20,7 @@ interface MetricData {
 
 @Component({
   selector: 'app-feedback-page',
-  imports: [ChartModule, CommonModule, TableModule,FormsModule],
+  imports: [ChartModule, CommonModule, TableModule,FormsModule,Rating],
   templateUrl: './feedback-page.component.html',
   styleUrls: ['./feedback-page.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -35,10 +36,10 @@ export class FeedbackPageComponent {
     product_type: '',
     mode_of_purchase: '',
     cost_of_product: '',
+    value:'',
     phone:localStorage.getItem('phone')
   };
-  count=0
-  form_id=[{"Enter the type" :"product_type" },{"Enter the platform" :"mode_of_purchase"},{"Enter the product" :"product" } ]
+  loader = false;
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private apicall: AuthService,
@@ -46,8 +47,18 @@ export class FeedbackPageComponent {
   ) {}
 
   onSubmit(): void {
-    this.count+=1;
-    console.log('Submitted Feedback:', this.feedback_form);
+    this.loader=true
+    console.log(this.feedback_form,'data')
+    this.apicall.submitUserFeedback(this.feedback_form).subscribe((data)=>{ this.feedback_form = {
+      product_type: '',
+      mode_of_purchase: '',
+      cost_of_product: '',
+      value:'',
+      phone: localStorage.getItem('phone') || '',
+    };
+  this.getUserData();
+  this.loader=false
+  })
   }
 
   getMetricData = () => {
