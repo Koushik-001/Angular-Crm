@@ -42,7 +42,7 @@ h1 {
 }
 
 p-table thead tr{
-    background: linear-gradient(130deg, #5794f7, red);
+    background: linear-gradient(130deg, red,beige);
 }
  
 .p-datatable thead > tr > th {
@@ -56,4 +56,12 @@ th:first-child {
 }
 th:last-child{
   border-radius: 0 10px 0 0; 
+}
+.feedback_form{
+  border-radius: 10px;
+  box-shadow: 0 0 10px gray;
+  padding: 10px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
 }

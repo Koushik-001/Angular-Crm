@@ -4,10 +4,8 @@
         <p-chart type="radar" [data]="data" [options]="options" class="metricDiv" />
 
         <div class="tableDiv">
-            <p-table [value]="tableData" 
-            scrollable="true" scrollHeight="300px" size="large"
-            >
-                <ng-template pTemplate="header" >
+            <p-table [value]="tableData" scrollable="true" scrollHeight="300px" size="large">
+                <ng-template pTemplate="header">
                     <tr>
                         <th>Name of the Product</th>
                         <th>Mode of Purchase</th>
@@ -25,5 +23,29 @@
 
         </div>
     </div>
-
+        <form (ngSubmit)="onSubmit()" #userForm="ngForm" class="feedback_form">
+            <input 
+              placeholder="Enter the type" 
+              id="product_type" 
+              [(ngModel)]="feedback_form.product_type" 
+              name="product_type" 
+              required
+            >
+            <input 
+              placeholder="Enter the platform" 
+              id="mode_of_purchase" 
+              [(ngModel)]="feedback_form.mode_of_purchase" 
+              name="mode_of_purchase" 
+              required
+            >
+            <input 
+              placeholder="Enter the product" 
+              id="product" 
+              [(ngModel)]="feedback_form.cost_of_product" 
+              name="product" 
+              required
+            >
+            <button type="submit" [disabled]="!userForm.valid">Submit</button>
+          </form>
+          
 </div>
