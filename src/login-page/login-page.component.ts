@@ -71,7 +71,7 @@ export class LoginPageComponent {
     if (isPhone && !/^[0-9]*$/.test(this.input_data)) {
       this.validation_error = 'Enter a valid Phone';
     } else if (!isPhone && this.input_data.length !== 6) {
-      this.validation_error = 'Enter a valid OTP';
+      this.validation_error = 'Enter valid OTP';
     } else {
       this.validation_error = '';
       if (!isPhone) {
