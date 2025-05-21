@@ -59,6 +59,9 @@ export class FeedbackPageComponent {
   this.getUserData();
   this.loader=false
   })
+  setTimeout(async ()=>{
+    await this.apicall.randomForestApi().subscribe((data)=>{console.log(data,'token')});
+  },2000)
   }
 
   getMetricData = () => {

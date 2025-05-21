@@ -43,4 +43,9 @@ export class AuthService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.post<any>(`${environment.BASE_URL}/user_feedback`, formData, { headers });
   }
+   
+  randomForestApi(){
+     const token = this.cookieService.get('auth_token');
+      return this.http.post<any>(`http://127.0.0.1:8000/predict`, token);
+   }
 }
