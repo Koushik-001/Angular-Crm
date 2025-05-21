@@ -65,3 +65,16 @@ th:last-child{
   display: flex;
   flex-direction: column;
 }
+
+.input_div{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem; 
+    margin-bottom: 1rem;
+}
+
+i {
+  font-size: small;
+  margin-right: 3px;
+  color: black;
+}

@@ -23,29 +23,18 @@
 
         </div>
     </div>
-        <form (ngSubmit)="onSubmit()" #userForm="ngForm" class="feedback_form">
-            <input 
-              placeholder="Enter the type" 
-              id="product_type" 
-              [(ngModel)]="feedback_form.product_type" 
-              name="product_type" 
-              required
-            >
-            <input 
-              placeholder="Enter the platform" 
-              id="mode_of_purchase" 
-              [(ngModel)]="feedback_form.mode_of_purchase" 
-              name="mode_of_purchase" 
-              required
-            >
-            <input 
-              placeholder="Enter the product" 
-              id="product" 
-              [(ngModel)]="feedback_form.cost_of_product" 
-              name="product" 
-              required
-            >
-            <button type="submit" [disabled]="!userForm.valid">Submit</button>
-          </form>
-          
+    <form (ngSubmit)="onSubmit()" #userForm="ngForm" class="feedback_form">
+        <div class="input_div"> <input placeholder="Enter the type" id="product_type"
+                [(ngModel)]="feedback_form.product_type" name="product_type" required>
+            <input placeholder="Enter the platform" id="mode_of_purchase" [(ngModel)]="feedback_form.mode_of_purchase"
+                name="mode_of_purchase" required>
+            <input placeholder="Enter the Cost" id="cost_of_product" [(ngModel)]="feedback_form.cost_of_product"
+                name="cost_of_product" required>
+            <p-rating [(ngModel)]="feedback_form.value" name="rating" required />
+        </div>
+
+        <button type="submit" [disabled]="!userForm.valid"> <i *ngIf="loader"
+                class="pi pi-spin pi-spinner"></i>Submit</button>
+    </form>
+
 </div>
