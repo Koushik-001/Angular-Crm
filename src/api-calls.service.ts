@@ -44,8 +44,18 @@ export class AuthService {
     return this.http.post<any>(`${environment.BASE_URL}/user_feedback`, formData, { headers });
   }
    
-  randomForestApi(){
-     const token = this.cookieService.get('auth_token');
-      return this.http.post<any>(`http://127.0.0.1:8000/predict`, token);
-   }
+  randomForestApi() {
+  const tokenValue = this.cookieService.get('auth_token');
+  const body = {
+    token: tokenValue  
+  };
+
+  return this.http.post<any>('http://127.0.0.1:8000/predict', body);
+}
+ 
+  modelTrainingApi(){
+    const phone = localStorage.getItem('phone')
+    const token = this.cookieService.get('auth_token');
+    return this.http.get<any>(`http://127.0.0.1:8000/train/${phone}/${token}`);
+  }
 }

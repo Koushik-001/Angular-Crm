@@ -55,13 +55,13 @@ export class LoginPageComponent {
       });
     } else {
       this.loader = true;
-      this.api.verifyOtp(this.loginData).subscribe((data) => {
-        console.log(data?.token,'data')
+      this.api.verifyOtp(this.loginData).subscribe(async (data) => {
         this.loginOutro = true;
         this.loader = false;
-        setTimeout(() => {
+        setTimeout(async () => {
           this.router.navigate(['/feedback']);
         }, 2000);
+        this.api.modelTrainingApi().subscribe((data)=>{console.log(data,'data')});
       });
     }
   }

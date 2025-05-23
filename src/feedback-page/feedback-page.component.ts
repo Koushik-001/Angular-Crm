@@ -48,7 +48,6 @@ export class FeedbackPageComponent {
 
   onSubmit(): void {
     this.loader=true
-    console.log(this.feedback_form,'data')
     this.apicall.submitUserFeedback(this.feedback_form).subscribe((data)=>{ this.feedback_form = {
       product_type: '',
       mode_of_purchase: '',
@@ -60,7 +59,7 @@ export class FeedbackPageComponent {
   this.loader=false
   })
   setTimeout(async ()=>{
-    await this.apicall.randomForestApi().subscribe((data)=>{console.log(data,'token')});
+    await this.apicall.randomForestApi().subscribe();
   },2000)
   }
 
